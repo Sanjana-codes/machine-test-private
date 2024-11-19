@@ -1,0 +1,16 @@
+﻿@model Category
+
+@{
+    ViewBag.Title = "Delete Category";
+}
+
+<h2>Delete Category</h2>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete the category <strong>@Model.CategoryName</strong>?
+</div>
+
+<form action="@Url.Action("Delete", new { id = Model.CategoryId })" method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+</form>

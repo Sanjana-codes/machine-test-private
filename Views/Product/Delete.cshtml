@@ -1,0 +1,16 @@
+﻿@model Product
+
+@{
+    ViewBag.Title = "Delete Product";
+}
+
+<h2>Delete Product</h2>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete the product <strong>@Model.ProductName</strong>?
+</div>
+
+<form action="@Url.Action("Delete", new { id = Model.ProductId })" method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+</form>

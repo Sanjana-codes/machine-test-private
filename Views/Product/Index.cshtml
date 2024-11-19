@@ -1,0 +1,58 @@
+﻿@model ProductListViewModel
+
+@{
+    ViewBag.Title = "Product List";
+}
+<link href="~/css/styling_pagination.css" rel="stylesheet" />
+<h2>Product List</h2>
+<a href="@Url.Action("Create")" class="btn btn-primary mb-3">Add New Product</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.CategoryId</td>
+                <td>@product.Category.CategoryName</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = product.ProductId })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = product.ProductId })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination Controls -->
+<div class="pagination">
+    @if (Model.CurrentPage > 1)
+    {
+        <a href="@Url.Action("Index", new { page = Model.CurrentPage - 1 })" class="btn btn-secondary">Previous</a>
+    }
+
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        <a href="@Url.Action("Index", new { page = i })" class="btn btn-secondary @(i == Model.CurrentPage ? "active" : "")">
+            @i
+        </a>
+    }
+
+    @if (Model.CurrentPage < Model.TotalPages)
+    {
+        <a href="@Url.Action("Index", new { page = Model.CurrentPage + 1 })" class="btn btn-secondary">Next</a>
+    }
+</div>
+
+
+
